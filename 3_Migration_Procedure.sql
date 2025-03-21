@@ -91,7 +91,7 @@ CREATE OR REPLACE PACKAGE BODY OrderMigrationPackage AS
       ) VALUES (
         OrderSeq.NEXTVAL,
         order_rec.ORDER_REF,
-        TO_DATE(v_date, 'DD-MON-YYYY'),  -- Adjust the date format if needed
+        TO_DATE(v_date, 'DD-MON-YYYY'),
         SupplierSeq.CURRVAL,
         TO_NUMBER(REPLACE(TRANSLATE(NVL(order_rec.ORDER_TOTAL_AMOUNT, '0'), 'OoIiSs-', '0011550'), ',', '')),
         order_rec.ORDER_DESCRIPTION,
@@ -135,7 +135,7 @@ CREATE OR REPLACE PACKAGE BODY OrderMigrationPackage AS
         InvoiceSeq.NEXTVAL,
         OrderSeq.CURRVAL,
         order_rec.INVOICE_REFERENCE,
-        TO_DATE(v_date, 'DD-MON-YYYY'),  -- Adjust the date format if needed
+        TO_DATE(v_date, 'DD-MON-YYYY'),
         order_rec.INVOICE_STATUS,
         order_rec.INVOICE_HOLD_REASON,
         TO_NUMBER(REPLACE(TRANSLATE(NVL(order_rec.INVOICE_AMOUNT, '0'), 'OoIiSs-', '0011550'), ',', '')),
@@ -152,7 +152,7 @@ CREATE OR REPLACE PACKAGE BODY OrderMigrationPackage AS
         PaymentSeq.NEXTVAL,
         InvoiceSeq.CURRVAL,
         TO_NUMBER(REPLACE(TRANSLATE(NVL(order_rec.INVOICE_AMOUNT, '0'), 'OoIiSs-', '0011550'), ',', '')),
-        SYSDATE  -- Assuming the current date for payment date
+        SYSDATE
       );
 
     END LOOP;
